@@ -3,6 +3,7 @@
 
 import {db} from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
+import { se } from "date-fns/locale";
 
 export const onBoardUser = async () => {
     try {
@@ -50,6 +51,22 @@ export const currentUserRole = async () => {
         });
         return dbUser?.role || null;
     } catch (error) {
-        
+        console.error("Error fetching user role:", error);
+        return null;
     }
+}
+
+export const getCurrentUser = async () => {
+   
+        const user = await currentUser();
+        if(!user) return null;
+        
+        const { id } = user;
+        const dbUser = await db.user.findUnique({
+            where: { clerkId: id },
+            select: {
+                id: true,
+            }
+        });
+        return dbUser || null;
 }
