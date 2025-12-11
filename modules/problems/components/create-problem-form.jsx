@@ -92,18 +92,9 @@ const sampledpData = {
   editorial:
     "This is a classic dynamic programming problem. The number of ways to reach the nth step is the sum of the number of ways to reach the (n-1)th step and the (n-2)th step, forming a Fibonacci-like sequence.",
   testCases: [
-    {
-      input: "2",
-      output: "2",
-    },
-    {
-      input: "3",
-      output: "3",
-    },
-    {
-      input: "4",
-      output: "5",
-    },
+    { input: "2", output: "2" },
+    { input: "3", output: "3" },
+    { input: "4", output: "5" },
   ],
   examples: {
     JAVASCRIPT: {
@@ -131,59 +122,68 @@ const sampledpData = {
 * @return {number}
 */
 function climbStairs(n) {
-// Write your code here
+  if (n <= 2) return n;
+  let a = 1, b = 2;
+  for (let i = 3; i <= n; i++) {
+    const c = a + b;
+    a = b;
+    b = c;
+  }
+  return b;
 }
 
 // Parse input and execute
 const readline = require('readline');
 const rl = readline.createInterface({
-input: process.stdin,
-output: process.stdout,
-terminal: false
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
 });
 
 rl.on('line', (line) => {
-const n = parseInt(line.trim());
-const result = climbStairs(n);
-
-console.log(result);
-rl.close();
+  const n = parseInt(line.trim(), 10);
+  const result = climbStairs(n);
+  console.log(result);
+  rl.close();
 });`,
     PYTHON: `class Solution:
   def climbStairs(self, n: int) -> int:
-      # Write your code here
-      pass
+      if n <= 2:
+          return n
+      a, b = 1, 2
+      for _ in range(3, n+1):
+          a, b = b, a + b
+      return b
 
 # Input parsing
 if __name__ == "__main__":
   import sys
-  
-  # Parse input
-  n = int(sys.stdin.readline().strip())
-  
-  # Solve
+  n_line = sys.stdin.readline().strip()
+  if not n_line:
+      n = 0
+  else:
+      n = int(n_line)
   sol = Solution()
-  result = sol.climbStairs(n)
-  
-  # Print result
-  print(result)`,
+  print(sol.climbStairs(n))`,
     JAVA: `import java.util.Scanner;
 
-class Main {
-  public int climbStairs(int n) {
-      // Write your code here
-      return 0;
+public class Main {
+  public static int climbStairs(int n) {
+      if (n <= 2) return n;
+      int a = 1, b = 2;
+      for (int i = 3; i <= n; i++) {
+          int c = a + b;
+          a = b;
+          b = c;
+      }
+      return b;
   }
-  
+
   public static void main(String[] args) {
       Scanner scanner = new Scanner(System.in);
-      int n = Integer.parseInt(scanner.nextLine().trim());
-      
-      // Use Main class instead of Solution
-      Main main = new Main();
-      int result = main.climbStairs(n);
-      
-      System.out.println(result);
+      String line = scanner.nextLine().trim();
+      int n = Integer.parseInt(line);
+      System.out.println(climbStairs(n));
       scanner.close();
   }
 }`,
@@ -194,261 +194,1077 @@ class Main {
 * @return {number}
 */
 function climbStairs(n) {
-// Base cases
-if (n <= 2) {
-  return n;
+  if (n <= 2) return n;
+  let a = 1, b = 2;
+  for (let i = 3; i <= n; i++) {
+    const c = a + b;
+    a = b;
+    b = c;
+  }
+  return b;
 }
 
-// Dynamic programming approach
-let dp = new Array(n + 1);
-dp[1] = 1;
-dp[2] = 2;
+// Parse input and execute
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
 
-for (let i = 3; i <= n; i++) {
-  dp[i] = dp[i - 1] + dp[i - 2];
-}
-
-return dp[n];
-}`,
+rl.on('line', (line) => {
+  const n = parseInt(line.trim(), 10);
+  const result = climbStairs(n);
+  console.log(result);
+  rl.close();
+});`,
     PYTHON: `class Solution:
   def climbStairs(self, n: int) -> int:
-      # Base cases
       if n <= 2:
           return n
-      
-      # Dynamic programming approach
-      dp = [0] * (n + 1)
-      dp[1] = 1
-      dp[2] = 2
-      
-      for i in range(3, n + 1):
-          dp[i] = dp[i - 1] + dp[i - 2]
-      
-      return dp[n]`,
+      a, b = 1, 2
+      for _ in range(3, n+1):
+          a, b = b, a + b
+      return b
+
+if __name__ == "__main__":
+  import sys
+  n_line = sys.stdin.readline().strip()
+  if not n_line:
+      n = 0
+  else:
+      n = int(n_line)
+  sol = Solution()
+  print(sol.climbStairs(n))`,
     JAVA: `import java.util.Scanner;
 
-class Main {
-  public int climbStairs(int n) {
-      // Base cases
-      if (n <= 2) {
-          return n;
-      }
-      
-      // Dynamic programming approach
-      int[] dp = new int[n + 1];
-      dp[1] = 1;
-      dp[2] = 2;
-      
+public class Main {
+  public static int climbStairs(int n) {
+      if (n <= 2) return n;
+      int a = 1, b = 2;
       for (int i = 3; i <= n; i++) {
-          dp[i] = dp[i - 1] + dp[i - 2];
+          int c = a + b;
+          a = b;
+          b = c;
       }
-      
-      return dp[n];
+      return b;
+  }
+
+  public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+      String line = scanner.nextLine().trim();
+      int n = Integer.parseInt(line);
+      System.out.println(climbStairs(n));
+      scanner.close();
   }
 }`,
   },
 };
 
+// const sampledpData = {
+//   title: "Product of Array Except Self",
+//   description:
+//     "Given an integer array nums of length n, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i]. Solve it without using division and in O(n) time.",
+//   difficulty: "MEDIUM",
+//   tags: ["Array", "Prefix Suffix", "Space Optimization"],
+//   constraints: "2 <= n <= 10^5, -10^9 <= nums[i] <= 10^9. The product of any prefix/suffix fits in 64-bit signed integer for tests.",
+//   hints:
+//     "Compute prefix products and suffix products (or do two passes with constant extra array).",
+//   editorial:
+//     "First pass compute prefix product into result, second pass traverse from right multiplying by suffix product, updating suffix as you go.",
+//   testCases: [
+//     { input: "4\n1 2 3 4", output: "24 12 8 6" },
+//     { input: "5\n-1 1 0 -3 3", output: "0 0 9 0 0" },
+//     { input: "2\n10 0", output: "0 10" }
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: "n = 4\\nnums = [1,2,3,4]",
+//       output: "24 12 8 6",
+//       explanation: "Products except self as expected."
+//     },
+//     PYTHON: {
+//       input: "n = 5\\nnums = [-1,1,0,-3,3]",
+//       output: "0 0 9 0 0",
+//       explanation: "Zero and negatives handled correctly."
+//     },
+//     JAVA: {
+//       input: "n = 2\\nnums = [10,0]",
+//       output: "0 10",
+//       explanation: "Handles zeros."
+//     }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * Reads:
+//  * first line: n
+//  * second line: n integers separated by spaces
+//  * Outputs: n integers separated by spaces
+//  */
+// function productExceptSelf(nums) {
+//   // Write your code here
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 2) {
+//     const n = parseInt(lines[0].trim(), 10);
+//     const nums = lines[1].trim().split(/\\s+/).map(Number);
+//     const res = productExceptSelf(nums);
+//     console.log(res.join(' '));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `# Input:
+// # line1: n
+// # line2: n space separated integers
+// class Solution:
+//   def productExceptSelf(self, nums):
+//       # Write your code here
+//       return []
+
+// if __name__ == "__main__":
+//   import sys
+//   lines = sys.stdin.read().strip().split()
+//   n = int(lines[0])
+//   nums = list(map(int, lines[1:1+n]))
+//   sol = Solution()
+//   print(' '.join(map(str, sol.productExceptSelf(nums))))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int[] productExceptSelf(int[] nums) {
+//     // Write your code here
+//     return new int[nums.length];
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] nums = new int[n];
+//     for (int i = 0; i < n; i++) nums[i] = Integer.parseInt(parts[i]);
+//     int[] res = productExceptSelf(nums);
+//     StringJoiner sj = new StringJoiner(" ");
+//     for (int x : res) sj.add(String.valueOf(x));
+//     System.out.println(sj.toString());
+//     sc.close();
+//   }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function productExceptSelf(nums) {
+//   const n = nums.length;
+//   const res = new Array(n).fill(1);
+//   let prefix = 1;
+//   for (let i = 0; i < n; i++) {
+//     res[i] = prefix;
+//     prefix *= nums[i];
+//   }
+//   let suffix = 1;
+//   for (let i = n - 1; i >= 0; i--) {
+//     res[i] *= suffix;
+//     suffix *= nums[i];
+//   }
+//   return res;
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 2) {
+//     const n = parseInt(lines[0].trim(), 10);
+//     const nums = lines[1].trim().split(/\\s+/).map(Number);
+//     console.log(productExceptSelf(nums).join(' '));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def productExceptSelf(self, nums):
+//       n = len(nums)
+//       res = [1] * n
+//       prefix = 1
+//       for i in range(n):
+//           res[i] = prefix
+//           prefix *= nums[i]
+//       suffix = 1
+//       for i in range(n-1, -1, -1):
+//           res[i] *= suffix
+//           suffix *= nums[i]
+//       return res
+
+// if __name__ == "__main__":
+//   import sys
+//   data = sys.stdin.read().strip().split()
+//   n = int(data[0])
+//   nums = list(map(int, data[1:1+n]))
+//   sol = Solution()
+//   print(' '.join(map(str, sol.productExceptSelf(nums))))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static long[] productExceptSelf(int[] nums) {
+//     int n = nums.length;
+//     long[] res = new long[n];
+//     Arrays.fill(res, 1L);
+//     long prefix = 1L;
+//     for (int i = 0; i < n; i++) {
+//       res[i] = prefix;
+//       prefix *= nums[i];
+//     }
+//     long suffix = 1L;
+//     for (int i = n - 1; i >= 0; i--) {
+//       res[i] *= suffix;
+//       suffix *= nums[i];
+//     }
+//     return res;
+//   }
+
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] nums = new int[n];
+//     for (int i = 0; i < n; i++) nums[i] = Integer.parseInt(parts[i]);
+//     long[] res = productExceptSelf(nums);
+//     StringJoiner sj = new StringJoiner(" ");
+//     for (long x : res) sj.add(String.valueOf(x));
+//     System.out.println(sj.toString());
+//     sc.close();
+//   }
+// }`
+//   }
+// };
+
 // Sample problem data for another type of question
-const sampleStringProblem = {
-  title: "Valid Palindrome",
+// const sampleStringProblem = {
+//   title: "Valid Palindrome",
+//   description:
+//     "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers. Given a string s, return true if it is a palindrome, or false otherwise.",
+//   difficulty: "EASY",
+//   tags: ["String", "Two Pointers"],
+//   constraints:
+//     "1 <= s.length <= 2 * 10^5\ns consists only of printable ASCII characters.",
+//   hints:
+//     "Consider using two pointers, one from the start and one from the end, moving towards the center.",
+//   editorial:
+//     "We can use two pointers approach to check if the string is a palindrome. One pointer starts from the beginning and the other from the end, moving towards each other.",
+//   testCases: [
+//     {
+//       input: "A man, a plan, a canal: Panama",
+//       output: "true",
+//     },
+//     {
+//       input: "race a car",
+//       output: "false",
+//     },
+//     {
+//       input: " ",
+//       output: "true",
+//     },
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: 's = "A man, a plan, a canal: Panama"',
+//       output: "true",
+//       explanation: '"amanaplanacanalpanama" is a palindrome.',
+//     },
+//     PYTHON: {
+//       input: 's = "A man, a plan, a canal: Panama"',
+//       output: "true",
+//       explanation: '"amanaplanacanalpanama" is a palindrome.',
+//     },
+//     JAVA: {
+//       input: 's = "A man, a plan, a canal: Panama"',
+//       output: "true",
+//       explanation: '"amanaplanacanalpanama" is a palindrome.',
+//     },
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//    * @param {string} s
+//    * @return {boolean}
+//    */
+//   function isPalindrome(s) {
+//     // Write your code here
+//   }
+  
+//   // Add readline for dynamic input handling
+//   const readline = require('readline');
+//   const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout,
+//     terminal: false
+//   });
+  
+//   // Process input line
+//   rl.on('line', (line) => {
+//     // Call solution with the input string
+//     const result = isPalindrome(line);
+    
+//     // Output the result
+//     console.log(result ? "true" : "false");
+//     rl.close();
+//   });`,
+//     PYTHON: `class Solution:
+//       def isPalindrome(self, s: str) -> bool:
+//           # Write your code here
+//           pass
+  
+//   # Input parsing
+//   if __name__ == "__main__":
+//       import sys
+//       # Read the input string
+//       s = sys.stdin.readline().strip()
+      
+//       # Call solution
+//       sol = Solution()
+//       result = sol.isPalindrome(s)
+      
+//       # Output result
+//       print(str(result).lower())  # Convert True/False to lowercase true/false`,
+//     JAVA: `import java.util.Scanner;
+
+// public class Main {
+//     public static String preprocess(String s) {
+//         return s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+//     }
+
+//     public static boolean isPalindrome(String s) {
+       
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         String input = sc.nextLine();
+
+//         boolean result = isPalindrome(input);
+//         System.out.println(result ? "true" : "false");
+//     }
+// }
+// `,
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `/**
+//    * @param {string} s
+//    * @return {boolean}
+//    */
+//   function isPalindrome(s) {
+//     // Convert to lowercase and remove non-alphanumeric characters
+//     s = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+//     // Check if it's a palindrome
+//     let left = 0;
+//     let right = s.length - 1;
+    
+//     while (left < right) {
+//       if (s[left] !== s[right]) {
+//         return false;
+//       }
+//       left++;
+//       right--;
+//     }
+    
+//     return true;
+//   }
+  
+//   // Add readline for dynamic input handling
+//   const readline = require('readline');
+//   const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout,
+//     terminal: false
+//   });
+  
+//   // Process input line
+//   rl.on('line', (line) => {
+//     // Call solution with the input string
+//     const result = isPalindrome(line);
+    
+//     // Output the result
+//     console.log(result ? "true" : "false");
+//     rl.close();
+//   });`,
+//     PYTHON: `class Solution:
+//       def isPalindrome(self, s: str) -> bool:
+//           # Convert to lowercase and keep only alphanumeric characters
+//           filtered_chars = [c.lower() for c in s if c.isalnum()]
+          
+//           # Check if it's a palindrome
+//           return filtered_chars == filtered_chars[::-1]
+  
+//   # Input parsing
+//   if __name__ == "__main__":
+//       import sys
+//       # Read the input string
+//       s = sys.stdin.readline().strip()
+      
+//       # Call solution
+//       sol = Solution()
+//       result = sol.isPalindrome(s)
+      
+//       # Output result
+//       print(str(result).lower())  # Convert True/False to lowercase true/false`,
+//     JAVA: `import java.util.Scanner;
+
+// public class Main {
+//     public static String preprocess(String s) {
+//         return s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+//     }
+
+//     public static boolean isPalindrome(String s) {
+//         s = preprocess(s);
+//         int left = 0, right = s.length() - 1;
+
+//         while (left < right) {
+//             if (s.charAt(left) != s.charAt(right)) return false;
+//             left++;
+//             right--;
+//         }
+
+//         return true;
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         String input = sc.nextLine();
+
+//         boolean result = isPalindrome(input);
+//         System.out.println(result ? "true" : "false");
+//     }
+// }
+// `,
+//   },
+// };
+
+// const reverseWordsProblem = {
+//   title: "Reverse Words in a String",
+//   description:
+//     "Given an input string s, reverse the order of the words. A word is defined as a sequence of non-space characters. The input string may contain leading or trailing spaces or multiple spaces between words. Return a string of the words in reverse order, separated by a single space. Do not include extra spaces in the output.",
+//   difficulty: "EASY",
+//   tags: ["String", "Two Pointers", "Parsing"],
+//   constraints:
+//     "1 <= s.length <= 10^5\ns consists of printable ASCII characters including spaces.",
+//   hints:
+//     "Trim extra spaces, split words, then join them in reverse order. Or use two pointers to build the reversed word list without extra split allocations.",
+//   editorial:
+//     "One simple approach: split on whitespace to extract words, filter out empty tokens, then reverse the list of words and join with a single space. A two-pointer solution can build the result in O(n) time and O(1) extra space for in-place languages.",
+//   testCases: [
+//     {
+//       input: "the sky is blue",
+//       output: "blue is sky the",
+//     },
+//     {
+//       input: "  hello world  ",
+//       output: "world hello",
+//     },
+//     {
+//       input: "a good   example",
+//       output: "example good a",
+//     },
+//     {
+//       input: "single",
+//       output: "single",
+//     }
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: 's = "  hello world  "',
+//       output: "world hello",
+//       explanation: "After trimming and reversing words, we get \"world hello\"."
+//     },
+//     PYTHON: {
+//       input: 's = "the sky is blue"',
+//       output: "blue is sky the",
+//       explanation: "Words reversed and joined by single spaces."
+//     },
+//     JAVA: {
+//       input: 's = "a good   example"',
+//       output: "example good a",
+//       explanation: "Multiple spaces are collapsed and words reversed."
+//     }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * @param {string} s
+//  * @return {string}
+//  */
+// function reverseWords(s) {
+//   // Write your code here
+// }
+
+// // Input handling
+// const readline = require('readline');
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+//   terminal: false
+// });
+
+// rl.on('line', (line) => {
+//   const result = reverseWords(line);
+//   console.log(result);
+//   rl.close();
+// });`,
+//     PYTHON: `class Solution:
+//     def reverseWords(self, s: str) -> str:
+//         # Write your code here
+//         pass
+
+// if __name__ == "__main__":
+//     import sys
+//     s = sys.stdin.readline().rstrip("\\n")
+//     sol = Solution()
+//     print(sol.reverseWords(s))`,
+//     JAVA: `import java.util.Scanner;
+
+// public class Main {
+//     public static String reverseWords(String s) {
+//         // Write your code here
+//         return "";
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         String input = sc.nextLine();
+//         System.out.println(reverseWords(input));
+//         sc.close();
+//     }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `/**
+//  * @param {string} s
+//  * @return {string}
+//  */
+// function reverseWords(s) {
+//   // Split by whitespace, filter empty tokens, reverse and join.
+//   return s.trim().split(/\\s+/).filter(Boolean).reverse().join(' ');
+// }
+
+// // Input handling
+// const readline = require('readline');
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+//   terminal: false
+// });
+
+// rl.on('line', (line) => {
+//   const result = reverseWords(line);
+//   console.log(result);
+//   rl.close();
+// });`,
+//     PYTHON: `class Solution:
+//     def reverseWords(self, s: str) -> str:
+//         # Strip leading/trailing spaces, split on whitespace, reverse and join
+//         tokens = s.strip().split()
+//         return " ".join(reversed(tokens))
+
+// if __name__ == "__main__":
+//     import sys
+//     s = sys.stdin.readline().rstrip("\\n")
+//     sol = Solution()
+//     print(sol.reverseWords(s))`,
+//     JAVA: `import java.util.Scanner;
+
+// public class Main {
+//     public static String reverseWords(String s) {
+//         // Trim and split on one or more whitespace characters
+//         String[] parts = s.trim().split("\\\\s+");
+//         StringBuilder sb = new StringBuilder();
+//         for (int i = parts.length - 1; i >= 0; i--) {
+//             if (parts[i].length() == 0) continue;
+//             sb.append(parts[i]);
+//             if (i != 0) sb.append(" ");
+//         }
+//         return sb.toString();
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         String input = sc.nextLine();
+//         System.out.println(reverseWords(input));
+//         sc.close();
+//     }
+// }`
+//   },
+// };
+
+// const reverseWordsProblem = {
+//   title: "Longest Substring Without Repeating Characters",
+//   description:
+//     "Given a string s, find the length of the longest substring without repeating characters.",
+//   difficulty: "MEDIUM",
+//   tags: ["String", "Sliding Window", "Two Pointers"],
+//   constraints: "0 <= s.length <= 10^5",
+//   hints:
+//     "Use a sliding window with a map/array to track last seen positions. Expand the window and move the left pointer when duplicate appears.",
+//   editorial:
+//     "Maintain two pointers (left and right). Expand right and if character is seen in the current window move left to lastSeen + 1. Track max window size.",
+//   testCases: [
+//     { input: "abcabcbb", output: "3" },
+//     { input: "bbbbb", output: "1" },
+//     { input: "pwwkew", output: "3" }
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: 's = "abcabcbb"',
+//       output: "3",
+//       explanation: 'The answer is "abc", with the length of 3.'
+//     },
+//     PYTHON: {
+//       input: 's = "pwwkew"',
+//       output: "3",
+//       explanation: 'The longest substring without repeating characters is "wke".'
+//     },
+//     JAVA: {
+//       input: 's = "bbbbb"',
+//       output: "1",
+//       explanation: 'The longest substring is "b".'
+//     }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * @param {string} s
+//  * @return {number}
+//  */
+// function lengthOfLongestSubstring(s) {
+//   // Write your code here
+// }
+
+// // Read input and print result
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// rl.on('line', (line) => {
+//   const s = line;
+//   console.log(lengthOfLongestSubstring(s));
+//   rl.close();
+// });`,
+//     PYTHON: `class Solution:
+//   def lengthOfLongestSubstring(self, s: str) -> int:
+//       # Write your code here
+//       pass
+
+// if __name__ == "__main__":
+//   import sys
+//   s = sys.stdin.readline().rstrip("\\n")
+//   sol = Solution()
+//   print(sol.lengthOfLongestSubstring(s))`,
+//     JAVA: `import java.util.Scanner;
+// import java.util.HashMap;
+
+// public class Main {
+//     public static int lengthOfLongestSubstring(String s) {
+//         // Write your code here
+//         return 0;
+//     }
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         String s = sc.nextLine();
+//         System.out.println(lengthOfLongestSubstring(s));
+//         sc.close();
+//     }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function lengthOfLongestSubstring(s) {
+//   const lastIndex = new Array(128).fill(-1);
+//   let left = 0, maxLen = 0;
+//   for (let right = 0; right < s.length; right++) {
+//     const c = s.charCodeAt(right);
+//     if (lastIndex[c] >= left) {
+//       left = lastIndex[c] + 1;
+//     }
+//     lastIndex[c] = right;
+//     maxLen = Math.max(maxLen, right - left + 1);
+//   }
+//   return maxLen;
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// rl.on('line', (line) => {
+//   console.log(lengthOfLongestSubstring(line));
+//   rl.close();
+// });`,
+//     PYTHON: `class Solution:
+//   def lengthOfLongestSubstring(self, s: str) -> int:
+//       last = {}
+//       left = 0
+//       max_len = 0
+//       for i, ch in enumerate(s):
+//           if ch in last and last[ch] >= left:
+//               left = last[ch] + 1
+//           last[ch] = i
+//           max_len = max(max_len, i - left + 1)
+//       return max_len
+
+// if __name__ == "__main__":
+//   import sys
+//   s = sys.stdin.readline().rstrip("\\n")
+//   sol = Solution()
+//   print(sol.lengthOfLongestSubstring(s))`,
+//     JAVA: `import java.util.HashMap;
+// import java.util.Scanner;
+
+// public class Main {
+//   public static int lengthOfLongestSubstring(String s) {
+//       HashMap<Character, Integer> last = new HashMap<>();
+//       int left = 0, maxLen = 0;
+//       for (int i = 0; i < s.length(); i++) {
+//           char c = s.charAt(i);
+//           if (last.containsKey(c) && last.get(c) >= left) {
+//               left = last.get(c) + 1;
+//           }
+//           last.put(c, i);
+//           maxLen = Math.max(maxLen, i - left + 1);
+//       }
+//       return maxLen;
+//   }
+
+//   public static void main(String[] args) {
+//       Scanner sc = new Scanner(System.in);
+//       String s = sc.nextLine();
+//       System.out.println(lengthOfLongestSubstring(s));
+//       sc.close();
+//   }
+// }`
+//   }
+// };
+
+// const reverseWordsProblem = {
+//   title: "Coin Change",
+//   description:
+//     "Given an integer amount and a list of coin denominations coins, return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.",
+//   difficulty: "MEDIUM",
+//   tags: ["Dynamic Programming", "Unbounded Knapsack", "Greedy? No"],
+//   constraints: "0 <= amount <= 10^4, 1 <= coins.length <= 100, 1 <= coins[i] <= 10^4",
+//   hints:
+//     "Use DP where dp[x] = min coins to make amount x. Initialize dp[0] = 0 and update for each coin.",
+//   editorial:
+//     "Classic DP: bottom-up compute dp from 0..amount, for each coin try dp[x-coin] + 1 if valid.",
+//   testCases: [
+//     { input: "11\n3\n1 2 5", output: "3" },
+//     { input: "7\n2\n2 3", output: "-1" },
+//     { input: "0\n1\n1", output: "0" }
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: "amount = 11\\ncoins = [1,2,5]",
+//       output: "3",
+//       explanation: "11 = 5 + 5 + 1"
+//     },
+//     PYTHON: {
+//       input: "amount = 7\\ncoins = [2,3]",
+//       output: "-1",
+//       explanation: "Cannot form 7 with coins 2 and 3."
+//     },
+//     JAVA: {
+//       input: "amount = 0\\ncoins = [1]",
+//       output: "0",
+//       explanation: "0 amount requires 0 coins."
+//     }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * Input:
+//  * line1: amount
+//  * line2: m (number of coins)
+//  * line3: m integers (coins)
+//  */
+// function coinChange(amount, coins) {
+//   // Write your code here
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 3) {
+//     const amount = parseInt(lines[0].trim(), 10);
+//     const m = parseInt(lines[1].trim(), 10);
+//     const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
+//     console.log(coinChange(amount, coins));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `# Input:
+// # line1: amount
+// # line2: m
+// # line3: m integers
+// class Solution:
+//   def coinChange(self, amount, coins):
+//       # Write your code here
+//       return -1
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   amount = int(parts[0])
+//   m = int(parts[1])
+//   coins = list(map(int, parts[2:2+m]))
+//   sol = Solution()
+//   print(sol.coinChange(amount, coins))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int coinChange(int amount, int[] coins) {
+//     // Write your code here
+//     return -1;
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int amount = Integer.parseInt(sc.nextLine().trim());
+//     int m = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] coins = new int[m];
+//     for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
+//     System.out.println(coinChange(amount, coins));
+//     sc.close();
+//   }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function coinChange(amount, coins) {
+//   const INF = amount + 1;
+//   const dp = new Array(amount + 1).fill(INF);
+//   dp[0] = 0;
+//   for (let coin of coins) {
+//     for (let x = coin; x <= amount; x++) {
+//       dp[x] = Math.min(dp[x], dp[x - coin] + 1);
+//     }
+//   }
+//   return dp[amount] === INF ? -1 : dp[amount];
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 3) {
+//     const amount = parseInt(lines[0].trim(), 10);
+//     const m = parseInt(lines[1].trim(), 10);
+//     const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
+//     console.log(coinChange(amount, coins));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def coinChange(self, amount, coins):
+//       INF = amount + 1
+//       dp = [INF] * (amount + 1)
+//       dp[0] = 0
+//       for coin in coins:
+//           for x in range(coin, amount + 1):
+//               dp[x] = min(dp[x], dp[x - coin] + 1)
+//       return -1 if dp[amount] == INF else dp[amount]
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   amount = int(parts[0])
+//   m = int(parts[1])
+//   coins = list(map(int, parts[2:2+m]))
+//   sol = Solution()
+//   print(sol.coinChange(amount, coins))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int coinChange(int amount, int[] coins) {
+//     int INF = amount + 1;
+//     int[] dp = new int[amount + 1];
+//     Arrays.fill(dp, INF);
+//     dp[0] = 0;
+//     for (int coin : coins) {
+//       for (int x = coin; x <= amount; x++) {
+//         dp[x] = Math.min(dp[x], dp[x - coin] + 1);
+//       }
+//     }
+//     return dp[amount] == INF ? -1 : dp[amount];
+//   }
+
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int amount = Integer.parseInt(sc.nextLine().trim());
+//     int m = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] coins = new int[m];
+//     for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
+//     System.out.println(coinChange(amount, coins));
+//     sc.close();
+//   }
+// }`
+//   }
+// };
+
+const reverseWordsProblem = {
+  title: "Coin Change",
   description:
-    "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers. Given a string s, return true if it is a palindrome, or false otherwise.",
-  difficulty: "EASY",
-  tags: ["String", "Two Pointers"],
-  constraints:
-    "1 <= s.length <= 2 * 10^5\ns consists only of printable ASCII characters.",
+    "Given an integer amount and a list of coin denominations coins, return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.",
+  difficulty: "MEDIUM",
+  tags: ["Dynamic Programming", "Unbounded Knapsack"],
+  constraints: "0 <= amount <= 10^4, 1 <= coins.length <= 100, 1 <= coins[i] <= 10^4",
   hints:
-    "Consider using two pointers, one from the start and one from the end, moving towards the center.",
+    "Use DP where dp[x] = min coins to make amount x. Initialize dp[0] = 0 and update for each coin.",
   editorial:
-    "We can use two pointers approach to check if the string is a palindrome. One pointer starts from the beginning and the other from the end, moving towards each other.",
+    "Bottom-up DP: dp[0] = 0; for each coin and for each x from coin..amount update dp[x] = min(dp[x], dp[x-coin]+1). Return -1 if dp[amount] is INF.",
   testCases: [
-    {
-      input: "A man, a plan, a canal: Panama",
-      output: "true",
-    },
-    {
-      input: "race a car",
-      output: "false",
-    },
-    {
-      input: " ",
-      output: "true",
-    },
+    { input: "11\n3\n1 2 5", output: "3" },   // 5 + 5 + 1
+    { input: "7\n2\n2 3", output: "3" },      // 3 + 2 + 2 (was incorrectly -1)
+    { input: "0\n1\n1", output: "0" }         // zero amount -> 0 coins
   ],
   examples: {
     JAVASCRIPT: {
-      input: 's = "A man, a plan, a canal: Panama"',
-      output: "true",
-      explanation: '"amanaplanacanalpanama" is a palindrome.',
+      input: "amount = 11\\ncoins = [1,2,5]",
+      output: "3",
+      explanation: "11 = 5 + 5 + 1"
     },
     PYTHON: {
-      input: 's = "A man, a plan, a canal: Panama"',
-      output: "true",
-      explanation: '"amanaplanacanalpanama" is a palindrome.',
+      input: "amount = 7\\ncoins = [2,3]",
+      output: "3",
+      explanation: "7 = 3 + 2 + 2"
     },
     JAVA: {
-      input: 's = "A man, a plan, a canal: Panama"',
-      output: "true",
-      explanation: '"amanaplanacanalpanama" is a palindrome.',
-    },
+      input: "amount = 0\\ncoins = [1]",
+      output: "0",
+      explanation: "0 amount requires 0 coins."
+    }
   },
   codeSnippets: {
     JAVASCRIPT: `/**
-   * @param {string} s
-   * @return {boolean}
-   */
-  function isPalindrome(s) {
-    // Write your code here
-  }
-  
-  // Add readline for dynamic input handling
-  const readline = require('readline');
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  });
-  
-  // Process input line
-  rl.on('line', (line) => {
-    // Call solution with the input string
-    const result = isPalindrome(line);
-    
-    // Output the result
-    console.log(result ? "true" : "false");
-    rl.close();
-  });`,
-    PYTHON: `class Solution:
-      def isPalindrome(self, s: str) -> bool:
-          # Write your code here
-          pass
-  
-  # Input parsing
-  if __name__ == "__main__":
-      import sys
-      # Read the input string
-      s = sys.stdin.readline().strip()
-      
-      # Call solution
-      sol = Solution()
-      result = sol.isPalindrome(s)
-      
-      # Output result
-      print(str(result).lower())  # Convert True/False to lowercase true/false`,
-    JAVA: `import java.util.Scanner;
-
-public class Main {
-    public static String preprocess(String s) {
-        return s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-    }
-
-    public static boolean isPalindrome(String s) {
-       
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        boolean result = isPalindrome(input);
-        System.out.println(result ? "true" : "false");
-    }
+ * Input:
+ * line1: amount
+ * line2: m (number of coins)
+ * line3: m integers (coins)
+ */
+function coinChange(amount, coins) {
+  // Write your code here
 }
-`,
+
+const readline = require('readline');
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+const lines = [];
+rl.on('line', (line) => {
+  lines.push(line);
+  if (lines.length >= 3) {
+    const amount = parseInt(lines[0].trim(), 10);
+    const m = parseInt(lines[1].trim(), 10);
+    const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
+    console.log(coinChange(amount, coins));
+    rl.close();
+  }
+});`,
+    PYTHON: `# Input:
+# line1: amount
+# line2: m
+# line3: m integers
+class Solution:
+  def coinChange(self, amount, coins):
+      # Write your code here
+      return -1
+
+if __name__ == "__main__":
+  import sys
+  parts = sys.stdin.read().strip().split()
+  amount = int(parts[0])
+  m = int(parts[1])
+  coins = list(map(int, parts[2:2+m]))
+  sol = Solution()
+  print(sol.coinChange(amount, coins))`,
+    JAVA: `import java.util.*;
+public class Main {
+  public static int coinChange(int amount, int[] coins) {
+    // Write your code here
+    return -1;
+  }
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int amount = Integer.parseInt(sc.nextLine().trim());
+    int m = Integer.parseInt(sc.nextLine().trim());
+    String[] parts = sc.nextLine().trim().split("\\\\s+");
+    int[] coins = new int[m];
+    for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
+    System.out.println(coinChange(amount, coins));
+    sc.close();
+  }
+}`
   },
   referenceSolutions: {
-    JAVASCRIPT: `/**
-   * @param {string} s
-   * @return {boolean}
-   */
-  function isPalindrome(s) {
-    // Convert to lowercase and remove non-alphanumeric characters
-    s = s.toLowerCase().replace(/[^a-z0-9]/g, '');
-    
-    // Check if it's a palindrome
-    let left = 0;
-    let right = s.length - 1;
-    
-    while (left < right) {
-      if (s[left] !== s[right]) {
-        return false;
-      }
-      left++;
-      right--;
+    JAVASCRIPT: `function coinChange(amount, coins) {
+  const INF = amount + 1;
+  const dp = new Array(amount + 1).fill(INF);
+  dp[0] = 0;
+  for (let coin of coins) {
+    for (let x = coin; x <= amount; x++) {
+      dp[x] = Math.min(dp[x], dp[x - coin] + 1);
     }
-    
-    return true;
   }
-  
-  // Add readline for dynamic input handling
-  const readline = require('readline');
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  });
-  
-  // Process input line
-  rl.on('line', (line) => {
-    // Call solution with the input string
-    const result = isPalindrome(line);
-    
-    // Output the result
-    console.log(result ? "true" : "false");
-    rl.close();
-  });`,
-    PYTHON: `class Solution:
-      def isPalindrome(self, s: str) -> bool:
-          # Convert to lowercase and keep only alphanumeric characters
-          filtered_chars = [c.lower() for c in s if c.isalnum()]
-          
-          # Check if it's a palindrome
-          return filtered_chars == filtered_chars[::-1]
-  
-  # Input parsing
-  if __name__ == "__main__":
-      import sys
-      # Read the input string
-      s = sys.stdin.readline().strip()
-      
-      # Call solution
-      sol = Solution()
-      result = sol.isPalindrome(s)
-      
-      # Output result
-      print(str(result).lower())  # Convert True/False to lowercase true/false`,
-    JAVA: `import java.util.Scanner;
-
-public class Main {
-    public static String preprocess(String s) {
-        return s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-    }
-
-    public static boolean isPalindrome(String s) {
-        s = preprocess(s);
-        int left = 0, right = s.length() - 1;
-
-        while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) return false;
-            left++;
-            right--;
-        }
-
-        return true;
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        boolean result = isPalindrome(input);
-        System.out.println(result ? "true" : "false");
-    }
+  return dp[amount] === INF ? -1 : dp[amount];
 }
-`,
-  },
+
+const readline = require('readline');
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+const lines = [];
+rl.on('line', (line) => {
+  lines.push(line);
+  if (lines.length >= 3) {
+    const amount = parseInt(lines[0].trim(), 10);
+    const m = parseInt(lines[1].trim(), 10);
+    const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
+    console.log(coinChange(amount, coins));
+    rl.close();
+  }
+});`,
+    PYTHON: `class Solution:
+  def coinChange(self, amount, coins):
+      INF = amount + 1
+      dp = [INF] * (amount + 1)
+      dp[0] = 0
+      for coin in coins:
+          for x in range(coin, amount + 1):
+              dp[x] = min(dp[x], dp[x - coin] + 1)
+      return -1 if dp[amount] == INF else dp[amount]
+
+if __name__ == "__main__":
+  import sys
+  parts = sys.stdin.read().strip().split()
+  amount = int(parts[0])
+  m = int(parts[1])
+  coins = list(map(int, parts[2:2+m]))
+  sol = Solution()
+  print(sol.coinChange(amount, coins))`,
+    JAVA: `import java.util.*;
+public class Main {
+  public static int coinChange(int amount, int[] coins) {
+    int INF = amount + 1;
+    int[] dp = new int[amount + 1];
+    Arrays.fill(dp, INF);
+    dp[0] = 0;
+    for (int coin : coins) {
+      for (int x = coin; x <= amount; x++) {
+        dp[x] = Math.min(dp[x], dp[x - coin] + 1);
+      }
+    }
+    return dp[amount] == INF ? -1 : dp[amount];
+  }
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int amount = Integer.parseInt(sc.nextLine().trim());
+    int m = Integer.parseInt(sc.nextLine().trim());
+    String[] parts = sc.nextLine().trim().split("\\\\s+");
+    int[] coins = new int[m];
+    for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
+    System.out.println(coinChange(amount, coins));
+    sc.close();
+  }
+}`
+  }
 };
+
 
 const CodeEditor = ({ value, onChange, language = "javascript" }) => {
   // Map language names to Monaco Editor language IDs
@@ -549,13 +1365,10 @@ const CreateProblemForm = () => {
         },
         body: JSON.stringify(values),
       });
-      // const response = await axios.post("/api/create-problem", values);
-
-      console.log("API response", response);
-      toast.success(response.message || "Problem created successfully");
-      router.push("/problems");      
-
-
+      if(response.success){
+        toast.success(response.message || "Problem created successfully");
+        router.push("/problems");      
+      }
     } catch (error) {
       console.error("Error creating problem:", error);
       toast.error("Failed to create problem. Please try again.");
@@ -565,7 +1378,7 @@ const CreateProblemForm = () => {
   }
 
   const loadSampleData = () => {
-    const sampleData = sampleType === "DP" ? sampledpData : sampleStringProblem;
+    const sampleData = sampleType === "DP" ? sampledpData : reverseWordsProblem;
 
     replaceTags(sampleData.tags.map((tag) => tag));
     replaceTestCases(sampleData.testCases.map((tc) => tc));

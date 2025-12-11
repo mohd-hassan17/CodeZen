@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Problem = Prisma.ProblemModel
+/**
+ * Model ProblemSolved
+ * 
+ */
+export type ProblemSolved = Prisma.ProblemSolvedModel
