@@ -30,6 +30,7 @@ model User {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   solvedProblems ProblemSolved[]
+  submissions    Submission[]
 
   @@index([role])
 }
@@ -52,9 +53,34 @@ model Problem {
   updatedAt          DateTime        @updatedAt
   user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   solvedBy           ProblemSolved[]
+  submissions        Submission[]
 
   @@index([difficulty])
 }
+
+model Submission {
+  id            String   @id @default(uuid())
+  userId        String
+  problemId     String
+  sourceCode    Json
+  language      String
+  stdin         String?
+  stdout        String?
+  stderr        String?
+  compileOutput String?
+  status        String
+  memory        String?
+  time          String?
+  createdAt     DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  // testCases TestCaseResult[]
+
+  @@index([status])
+}
+
+
 
 model ProblemSolved {
   id        String @id @default(uuid())
@@ -62,7 +88,7 @@ model ProblemSolved {
   problemId String
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  problem   Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)  //If a User is deleted → all their ProblemSolved records get deleted automatically.
+  problem   Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade) //If a User is deleted → all their ProblemSolved records get deleted automatically.
   createdAt DateTime @default(now())
 
   @@unique([userId, problemId])
