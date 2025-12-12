@@ -1365,10 +1365,10 @@ const CreateProblemForm = () => {
         },
         body: JSON.stringify(values),
       });
-      if(response.success){
+      // if(response.success)
         toast.success(response.message || "Problem created successfully");
         router.push("/problems");      
-      }
+      
     } catch (error) {
       console.error("Error creating problem:", error);
       toast.error("Failed to create problem. Please try again.");
