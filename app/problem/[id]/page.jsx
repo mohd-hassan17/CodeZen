@@ -38,7 +38,10 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { getJudgeOLanguageId } from "@/lib/judge0";
 import { toast } from "sonner";
 import Link from "next/link";
-import { getProblemById } from "@/modules/problems/actions";
+import { executeCode, getProblemById } from "@/modules/problems/actions";
+// import { getJudgeOLanguageId } from "@/lib/judge0";
+import { SubmissionDetails } from "@/modules/problems/components/submission-details";
+import { TestCaseTable } from "@/modules/problems/components/test-case-table";
 
 const getDifficultyColor = (difficulty) => {
   switch (difficulty) {
@@ -86,6 +89,31 @@ const ProblemIdPage = ({ params }) => {
         setCode(problem.codeSnippets[selectedLanguage])
     }
   },[selectedLanguage, problem])
+
+  const handleRun = async () => {
+
+   try {
+    setIsRunning(true);
+      const language_id = getJudgeOLanguageId(selectedLanguage);
+      const stdin = problem.testCases.map((tc) => tc.input);
+      const expected_outputs = problem.testCases.map((tc) => tc.output);
+      const res = await executeCode(code, language_id, stdin, expected_outputs, problem.id);
+      setExecutionResponse(res);
+      if(res.success){
+        toast.success("Code executed successfully");
+      }
+    } catch (error) {
+      console.log("Error executing code", error);
+      toast.error("Error executing code");
+    }
+    finally {
+      setIsRunning(false);
+    }
+  };
+
+  const handleSubmit =  () => {
+    toast.success("TODO: Coming Soon🔥");
+  };
 
 if(!problem){
     return (
@@ -257,7 +285,7 @@ if(!problem){
                 </div>
                 <div className="flex gap-3 mt-4">
                   <Button
-                    // onClick={handleRun}
+                    onClick={handleRun}
                     disabled={isRunning}
                     variant="outline"
                     className="flex items-center gap-2"
@@ -266,7 +294,7 @@ if(!problem){
                     {isRunning ? 'Running...' : 'Run'}
                   </Button>
                   <Button
-                    // onClick={handleSubmit}
+                    onClick={handleSubmit}
                     disabled={isSubmitting}
                     className="flex items-center gap-2"
                   >
@@ -313,12 +341,12 @@ if(!problem){
             </Card>
 
             {/* Test Results and Submission Details */}
-            {/* {executionResponse && executionResponse.submission && (
+            {executionResponse && executionResponse.submission && (
               <div className="space-y-4 mt-4">
                 <SubmissionDetails submission={executionResponse.submission} />
                 <TestCaseTable testCases={executionResponse.submission.testCases} />
               </div>
-            )} */}
+            )}
           </div>
           
         </div>
