@@ -9,7 +9,6 @@ const Problems = async () => {
   const user = await currentUser();
   let dbUser = null
 
-
   if(user){
      dbUser = await db.user.findUnique({
       where:{clerkId: user.id},
