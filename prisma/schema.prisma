@@ -31,12 +31,13 @@ model User {
   updatedAt      DateTime        @updatedAt
   solvedProblems ProblemSolved[]
   submissions    Submission[]
+  playlists      Playlist[]
 
   @@index([role])
 }
 
 model Problem {
-  id                 String          @id @default(uuid())
+  id                 String              @id @default(uuid())
   title              String
   description        String
   difficulty         Difficulty
@@ -49,11 +50,12 @@ model Problem {
   codeSnippets       Json
   referenceSolutions Json
   userId             String
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   solvedBy           ProblemSolved[]
   submissions        Submission[]
+  problemInPlaylists ProblemInPlaylist[]
 
   @@index([difficulty])
 }
@@ -110,4 +112,31 @@ model ProblemSolved {
   createdAt DateTime @default(now())
 
   @@unique([userId, problemId])
+}
+
+model Playlist {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  problems ProblemInPlaylist[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([name, userId])
+}
+
+model ProblemInPlaylist {
+  id         String   @id @default(uuid())
+  playlistId String
+  problemId  String
+  createdAt  DateTime @default(now())
+
+  playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  problem  Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@unique([playlistId, problemId])
 }
