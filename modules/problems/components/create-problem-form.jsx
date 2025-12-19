@@ -1100,47 +1100,435 @@ public class Main {
 //   }
 // };
 
-const reverseWordsProblem = {
-  title: "Coin Change",
+// const twoSumProblem = {
+//   title: "Two Sum",
+//   description:
+//     "Given an array of integers nums and an integer target, return the indices of the two numbers such that they add up to target. Exactly one solution exists.",
+//   difficulty: "EASY",
+//   tags: ["Array", "Hash Table"],
+//   constraints:
+//     "2 <= nums.length <= 10^4, -10^9 <= nums[i], target <= 10^9",
+//   hints:
+//     "Use a hash map to store numbers you have seen so far.",
+//   editorial:
+//     "Iterate through the array and check if target - nums[i] exists in a hash map.",
+//   testCases: [
+//     { input: "4\n2 7 11 15\n9", output: "0 1" },
+//     { input: "3\n3 2 4\n6", output: "1 2" }
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: "nums = [2,7,11,15]\ntarget = 9",
+//       output: "0 1"
+//     },
+//     PYTHON: {
+//       input: "nums = [3,2,4]\ntarget = 6",
+//       output: "1 2"
+//     },
+//     JAVA: {
+//       input: "nums = [3,3]\ntarget = 6",
+//       output: "0 1"
+//     }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `function twoSum(nums, target) {
+//   // Write your code here
+// }
+
+// const fs = require("fs");
+// const data = fs.readFileSync(0,"utf8").trim().split(/\\s+/);
+// let i = 0;
+// const n = parseInt(data[i++]);
+// const nums = [];
+// for (let j = 0; j < n; j++) nums.push(parseInt(data[i++]));
+// const target = parseInt(data[i++]);
+// const res = twoSum(nums, target);
+// console.log(res.join(" "));
+// `,
+//     PYTHON: `class Solution:
+//   def twoSum(self, nums, target):
+//       # Write your code here
+//       return []
+
+// if __name__ == "__main__":
+//   import sys
+//   data = list(map(int, sys.stdin.read().split()))
+//   n = data[0]
+//   nums = data[1:1+n]
+//   target = data[1+n]
+//   print(*Solution().twoSum(nums, target))
+// `,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int[] twoSum(int[] nums, int target) {
+//     // Write your code here
+//     return new int[0];
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = sc.nextInt();
+//     int[] nums = new int[n];
+//     for (int i = 0; i < n; i++) nums[i] = sc.nextInt();
+//     int target = sc.nextInt();
+//     int[] res = twoSum(nums, target);
+//     System.out.println(res[0] + " " + res[1]);
+//   }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function twoSum(nums, target) {
+//   const map = new Map();
+//   for (let i = 0; i < nums.length; i++) {
+//     const need = target - nums[i];
+//     if (map.has(need)) return [map.get(need), i];
+//     map.set(nums[i], i);
+//   }
+// }`,
+//     PYTHON: `class Solution:
+//   def twoSum(self, nums, target):
+//       mp = {}
+//       for i, x in enumerate(nums):
+//           if target - x in mp:
+//               return [mp[target - x], i]
+//           mp[x] = i`,
+//     JAVA: `public static int[] twoSum(int[] nums, int target) {
+//   Map<Integer, Integer> map = new HashMap<>();
+//   for (int i = 0; i < nums.length; i++) {
+//     if (map.containsKey(target - nums[i]))
+//       return new int[]{map.get(target - nums[i]), i};
+//     map.put(nums[i], i);
+//   }
+//   return new int[0];
+// }`
+//   }
+// };
+// const maxSubarrayProblem = {
+//   title: "Maximum Subarray Sum",
+//   description:
+//     "Given an integer array nums, find the contiguous subarray with the maximum sum.",
+//   difficulty: "MEDIUM",
+//   tags: ["Array", "Dynamic Programming"],
+//   constraints:
+//     "1 <= n <= 10^5, -10^9 <= nums[i] <= 10^9",
+//   hints:
+//     "Use Kadane’s algorithm.",
+//   editorial:
+//     "Track current sum and reset when it becomes negative.",
+//   testCases: [
+//     { input: "5\n-2 1 -3 4 -1", output: "4" },
+//     { input: "3\n1 2 3", output: "6" }
+//   ],
+//   examples: {
+//     JAVASCRIPT: { input: "nums = [-2,1,-3,4,-1]", output: "4" },
+//     PYTHON: { input: "nums = [1,2,3]", output: "6" },
+//     JAVA: { input: "nums = [-1]", output: "-1" }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * Input:
+//  * line1: n
+//  * line2: n integers
+//  */
+// function maxSubArray(nums) {
+//   // Write your code here
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 2) {
+//     const n = parseInt(lines[0].trim(), 10);
+//     const nums = lines[1].trim().split(/\\s+/).map(Number).slice(0, n);
+//     console.log(maxSubArray(nums));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def maxSubArray(self, nums):
+//       # Write your code here
+//       return 0
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   n = int(parts[0])
+//   nums = list(map(int, parts[1:1+n]))
+//   print(Solution().maxSubArray(nums))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int maxSubArray(int[] nums) {
+//     // Write your code here
+//     return 0;
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] nums = new int[n];
+//     for (int i = 0; i < n; i++) nums[i] = Integer.parseInt(parts[i]);
+//     System.out.println(maxSubArray(nums));
+//     sc.close();
+//   }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function maxSubArray(nums) {
+//   let cur = nums[0], best = nums[0];
+//   for (let i = 1; i < nums.length; i++) {
+//     cur = Math.max(nums[i], cur + nums[i]);
+//     best = Math.max(best, cur);
+//   }
+//   return best;
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 2) {
+//     const n = parseInt(lines[0].trim(), 10);
+//     const nums = lines[1].trim().split(/\\s+/).map(Number).slice(0, n);
+//     console.log(maxSubArray(nums));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def maxSubArray(self, nums):
+//       cur = best = nums[0]
+//       for x in nums[1:]:
+//           cur = max(x, cur + x)
+//           best = max(best, cur)
+//       return best
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   n = int(parts[0])
+//   nums = list(map(int, parts[1:1+n]))
+//   print(Solution().maxSubArray(nums))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int maxSubArray(int[] nums) {
+//     int cur = nums[0], best = nums[0];
+//     for (int i = 1; i < nums.length; i++) {
+//       cur = Math.max(nums[i], cur + nums[i]);
+//       best = Math.max(best, cur);
+//     }
+//     return best;
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] nums = new int[n];
+//     for (int i = 0; i < n; i++) nums[i] = Integer.parseInt(parts[i]);
+//     System.out.println(maxSubArray(nums));
+//     sc.close();
+//   }
+// }`
+//   }
+// };
+// const minPathSumProblem = {
+//   title: "Minimum Path Sum",
+//   description:
+//     "Given a grid of non-negative integers, find a path from top-left to bottom-right with minimum sum.",
+//   difficulty: "HARD",
+//   tags: ["Dynamic Programming", "Grid"],
+//   constraints:
+//     "1 <= n,m <= 200",
+//   hints:
+//     "DP from top-left.",
+//   editorial:
+//     "dp[i][j] = grid[i][j] + min(top, left).",
+//   testCases: [
+//     { input: "2 2\n1 3\n1 5", output: "7" }
+//   ],
+//   examples: {
+//     JAVASCRIPT: { input: "grid = [[1,3],[1,5]]", output: "7" },
+//     PYTHON: { input: "grid = [[1,2],[1,1]]", output: "3" },
+//     JAVA: { input: "grid = [[5]]", output: "5" }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * Input:
+//  * line1: n m
+//  * next n lines: m integers
+//  */
+// function minPathSum(grid) {
+//   // Write your code here
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 1) {
+//     const [n, m] = lines[0].split(/\\s+/).map(Number);
+//     if (lines.length === n + 1) {
+//       const grid = [];
+//       for (let i = 1; i <= n; i++)
+//         grid.push(lines[i].split(/\\s+/).map(Number).slice(0, m));
+//       console.log(minPathSum(grid));
+//       rl.close();
+//     }
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def minPathSum(self, grid):
+//       # Write your code here
+//       return 0
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   idx = 0
+//   n, m = int(parts[idx]), int(parts[idx+1])
+//   idx += 2
+//   grid = []
+//   for _ in range(n):
+//       row = list(map(int, parts[idx:idx+m]))
+//       idx += m
+//       grid.append(row)
+//   print(Solution().minPathSum(grid))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int minPathSum(int[][] grid) {
+//     // Write your code here
+//     return 0;
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = sc.nextInt();
+//     int m = sc.nextInt();
+//     int[][] grid = new int[n][m];
+//     for (int i = 0; i < n; i++)
+//       for (int j = 0; j < m; j++)
+//         grid[i][j] = sc.nextInt();
+//     System.out.println(minPathSum(grid));
+//     sc.close();
+//   }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function minPathSum(grid) {
+//   const n = grid.length, m = grid[0].length;
+//   for (let i = 0; i < n; i++) {
+//     for (let j = 0; j < m; j++) {
+//       if (i === 0 && j === 0) continue;
+//       const top = i > 0 ? grid[i-1][j] : Infinity;
+//       const left = j > 0 ? grid[i][j-1] : Infinity;
+//       grid[i][j] += Math.min(top, left);
+//     }
+//   }
+//   return grid[n-1][m-1];
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 1) {
+//     const [n, m] = lines[0].split(/\\s+/).map(Number);
+//     if (lines.length === n + 1) {
+//       const grid = [];
+//       for (let i = 1; i <= n; i++)
+//         grid.push(lines[i].split(/\\s+/).map(Number).slice(0, m));
+//       console.log(minPathSum(grid));
+//       rl.close();
+//     }
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def minPathSum(self, grid):
+//       n, m = len(grid), len(grid[0])
+//       for i in range(n):
+//           for j in range(m):
+//               if i == 0 and j == 0: continue
+//               top = grid[i-1][j] if i > 0 else 10**18
+//               left = grid[i][j-1] if j > 0 else 10**18
+//               grid[i][j] += min(top, left)
+//       return grid[-1][-1]
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().split()
+//   idx = 0
+//   n, m = int(parts[idx]), int(parts[idx+1])
+//   idx += 2
+//   grid = []
+//   for _ in range(n):
+//       grid.append(list(map(int, parts[idx:idx+m])))
+//       idx += m
+//   print(Solution().minPathSum(grid))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int minPathSum(int[][] grid) {
+//     int n = grid.length, m = grid[0].length;
+//     for (int i = 0; i < n; i++) {
+//       for (int j = 0; j < m; j++) {
+//         if (i == 0 && j == 0) continue;
+//         int top = i > 0 ? grid[i-1][j] : Integer.MAX_VALUE;
+//         int left = j > 0 ? grid[i][j-1] : Integer.MAX_VALUE;
+//         grid[i][j] += Math.min(top, left);
+//       }
+//     }
+//     return grid[n-1][m-1];
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int n = sc.nextInt();
+//     int m = sc.nextInt();
+//     int[][] grid = new int[n][m];
+//     for (int i = 0; i < n; i++)
+//       for (int j = 0; j < m; j++)
+//         grid[i][j] = sc.nextInt();
+//     System.out.println(minPathSum(grid));
+//     sc.close();
+//   }
+// }`
+//   }
+// };
+const reverseStringProblem = {
+  title: "Reverse String",
   description:
-    "Given an integer amount and a list of coin denominations coins, return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.",
-  difficulty: "MEDIUM",
-  tags: ["Dynamic Programming", "Unbounded Knapsack"],
-  constraints: "0 <= amount <= 10^4, 1 <= coins.length <= 100, 1 <= coins[i] <= 10^4",
+    "Given a string s, return the reversed string.",
+  difficulty: "EASY",
+  tags: ["String"],
+  constraints:
+    "1 <= s.length <= 10^5",
   hints:
-    "Use DP where dp[x] = min coins to make amount x. Initialize dp[0] = 0 and update for each coin.",
+    "Traverse from the end or use built-in reverse.",
   editorial:
-    "Bottom-up DP: dp[0] = 0; for each coin and for each x from coin..amount update dp[x] = min(dp[x], dp[x-coin]+1). Return -1 if dp[amount] is INF.",
+    "Reverse the string and print the result.",
   testCases: [
-    { input: "11\n3\n1 2 5", output: "3" },   // 5 + 5 + 1
-    { input: "7\n2\n2 3", output: "3" },      // 3 + 2 + 2 (was incorrectly -1)
-    { input: "0\n1\n1", output: "0" }         // zero amount -> 0 coins
+    { input: "hello", output: "olleh" },
+    { input: "abcd", output: "dcba" }
   ],
   examples: {
     JAVASCRIPT: {
-      input: "amount = 11\\ncoins = [1,2,5]",
-      output: "3",
-      explanation: "11 = 5 + 5 + 1"
+      input: "s = hello",
+      output: "olleh"
     },
     PYTHON: {
-      input: "amount = 7\\ncoins = [2,3]",
-      output: "3",
-      explanation: "7 = 3 + 2 + 2"
+      input: "s = abcd",
+      output: "dcba"
     },
     JAVA: {
-      input: "amount = 0\\ncoins = [1]",
-      output: "0",
-      explanation: "0 amount requires 0 coins."
+      input: "s = world",
+      output: "dlrow"
     }
   },
   codeSnippets: {
     JAVASCRIPT: `/**
  * Input:
- * line1: amount
- * line2: m (number of coins)
- * line3: m integers (coins)
+ * line1: string s
  */
-function coinChange(amount, coins) {
+function reverseString(s) {
   // Write your code here
 }
 
@@ -1149,60 +1537,41 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const lines = [];
 rl.on('line', (line) => {
   lines.push(line);
-  if (lines.length >= 3) {
-    const amount = parseInt(lines[0].trim(), 10);
-    const m = parseInt(lines[1].trim(), 10);
-    const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
-    console.log(coinChange(amount, coins));
+  if (lines.length >= 1) {
+    const s = lines[0];
+    console.log(reverseString(s));
     rl.close();
   }
 });`,
     PYTHON: `# Input:
-# line1: amount
-# line2: m
-# line3: m integers
+# line1: string s
 class Solution:
-  def coinChange(self, amount, coins):
+  def reverseString(self, s):
       # Write your code here
-      return -1
+      return ""
 
 if __name__ == "__main__":
   import sys
-  parts = sys.stdin.read().strip().split()
-  amount = int(parts[0])
-  m = int(parts[1])
-  coins = list(map(int, parts[2:2+m]))
+  s = sys.stdin.read().strip()
   sol = Solution()
-  print(sol.coinChange(amount, coins))`,
+  print(sol.reverseString(s))`,
     JAVA: `import java.util.*;
 public class Main {
-  public static int coinChange(int amount, int[] coins) {
+  public static String reverseString(String s) {
     // Write your code here
-    return -1;
+    return "";
   }
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    int amount = Integer.parseInt(sc.nextLine().trim());
-    int m = Integer.parseInt(sc.nextLine().trim());
-    String[] parts = sc.nextLine().trim().split("\\\\s+");
-    int[] coins = new int[m];
-    for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
-    System.out.println(coinChange(amount, coins));
+    String s = sc.nextLine();
+    System.out.println(reverseString(s));
     sc.close();
   }
 }`
   },
   referenceSolutions: {
-    JAVASCRIPT: `function coinChange(amount, coins) {
-  const INF = amount + 1;
-  const dp = new Array(amount + 1).fill(INF);
-  dp[0] = 0;
-  for (let coin of coins) {
-    for (let x = coin; x <= amount; x++) {
-      dp[x] = Math.min(dp[x], dp[x - coin] + 1);
-    }
-  }
-  return dp[amount] === INF ? -1 : dp[amount];
+    JAVASCRIPT: `function reverseString(s) {
+  return s.split('').reverse().join('');
 }
 
 const readline = require('readline');
@@ -1210,60 +1579,199 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const lines = [];
 rl.on('line', (line) => {
   lines.push(line);
-  if (lines.length >= 3) {
-    const amount = parseInt(lines[0].trim(), 10);
-    const m = parseInt(lines[1].trim(), 10);
-    const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
-    console.log(coinChange(amount, coins));
+  if (lines.length >= 1) {
+    console.log(reverseString(lines[0]));
     rl.close();
   }
 });`,
     PYTHON: `class Solution:
-  def coinChange(self, amount, coins):
-      INF = amount + 1
-      dp = [INF] * (amount + 1)
-      dp[0] = 0
-      for coin in coins:
-          for x in range(coin, amount + 1):
-              dp[x] = min(dp[x], dp[x - coin] + 1)
-      return -1 if dp[amount] == INF else dp[amount]
+  def reverseString(self, s):
+      return s[::-1]
 
 if __name__ == "__main__":
   import sys
-  parts = sys.stdin.read().strip().split()
-  amount = int(parts[0])
-  m = int(parts[1])
-  coins = list(map(int, parts[2:2+m]))
-  sol = Solution()
-  print(sol.coinChange(amount, coins))`,
+  s = sys.stdin.read().strip()
+  print(Solution().reverseString(s))`,
     JAVA: `import java.util.*;
 public class Main {
-  public static int coinChange(int amount, int[] coins) {
-    int INF = amount + 1;
-    int[] dp = new int[amount + 1];
-    Arrays.fill(dp, INF);
-    dp[0] = 0;
-    for (int coin : coins) {
-      for (int x = coin; x <= amount; x++) {
-        dp[x] = Math.min(dp[x], dp[x - coin] + 1);
-      }
-    }
-    return dp[amount] == INF ? -1 : dp[amount];
+  public static String reverseString(String s) {
+    return new StringBuilder(s).reverse().toString();
   }
-
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    int amount = Integer.parseInt(sc.nextLine().trim());
-    int m = Integer.parseInt(sc.nextLine().trim());
-    String[] parts = sc.nextLine().trim().split("\\\\s+");
-    int[] coins = new int[m];
-    for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
-    System.out.println(coinChange(amount, coins));
+    String s = sc.nextLine();
+    System.out.println(reverseString(s));
     sc.close();
   }
 }`
   }
 };
+
+
+// const reverseWordsProblem = {
+//   title: "Coin Change",
+//   description:
+//     "Given an integer amount and a list of coin denominations coins, return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.",
+//   difficulty: "MEDIUM",
+//   tags: ["Dynamic Programming", "Unbounded Knapsack"],
+//   constraints: "0 <= amount <= 10^4, 1 <= coins.length <= 100, 1 <= coins[i] <= 10^4",
+//   hints:
+//     "Use DP where dp[x] = min coins to make amount x. Initialize dp[0] = 0 and update for each coin.",
+//   editorial:
+//     "Bottom-up DP: dp[0] = 0; for each coin and for each x from coin..amount update dp[x] = min(dp[x], dp[x-coin]+1). Return -1 if dp[amount] is INF.",
+//   testCases: [
+//     { input: "11\n3\n1 2 5", output: "3" },   // 5 + 5 + 1
+//     { input: "7\n2\n2 3", output: "3" },      // 3 + 2 + 2 (was incorrectly -1)
+//     { input: "0\n1\n1", output: "0" }         // zero amount -> 0 coins
+//   ],
+//   examples: {
+//     JAVASCRIPT: {
+//       input: "amount = 11\\ncoins = [1,2,5]",
+//       output: "3",
+//       explanation: "11 = 5 + 5 + 1"
+//     },
+//     PYTHON: {
+//       input: "amount = 7\\ncoins = [2,3]",
+//       output: "3",
+//       explanation: "7 = 3 + 2 + 2"
+//     },
+//     JAVA: {
+//       input: "amount = 0\\ncoins = [1]",
+//       output: "0",
+//       explanation: "0 amount requires 0 coins."
+//     }
+//   },
+//   codeSnippets: {
+//     JAVASCRIPT: `/**
+//  * Input:
+//  * line1: amount
+//  * line2: m (number of coins)
+//  * line3: m integers (coins)
+//  */
+// function coinChange(amount, coins) {
+//   // Write your code here
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 3) {
+//     const amount = parseInt(lines[0].trim(), 10);
+//     const m = parseInt(lines[1].trim(), 10);
+//     const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
+//     console.log(coinChange(amount, coins));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `# Input:
+// # line1: amount
+// # line2: m
+// # line3: m integers
+// class Solution:
+//   def coinChange(self, amount, coins):
+//       # Write your code here
+//       return -1
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   amount = int(parts[0])
+//   m = int(parts[1])
+//   coins = list(map(int, parts[2:2+m]))
+//   sol = Solution()
+//   print(sol.coinChange(amount, coins))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int coinChange(int amount, int[] coins) {
+//     // Write your code here
+//     return -1;
+//   }
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int amount = Integer.parseInt(sc.nextLine().trim());
+//     int m = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] coins = new int[m];
+//     for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
+//     System.out.println(coinChange(amount, coins));
+//     sc.close();
+//   }
+// }`
+//   },
+//   referenceSolutions: {
+//     JAVASCRIPT: `function coinChange(amount, coins) {
+//   const INF = amount + 1;
+//   const dp = new Array(amount + 1).fill(INF);
+//   dp[0] = 0;
+//   for (let coin of coins) {
+//     for (let x = coin; x <= amount; x++) {
+//       dp[x] = Math.min(dp[x], dp[x - coin] + 1);
+//     }
+//   }
+//   return dp[amount] === INF ? -1 : dp[amount];
+// }
+
+// const readline = require('readline');
+// const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+// const lines = [];
+// rl.on('line', (line) => {
+//   lines.push(line);
+//   if (lines.length >= 3) {
+//     const amount = parseInt(lines[0].trim(), 10);
+//     const m = parseInt(lines[1].trim(), 10);
+//     const coins = lines[2].trim().split(/\\s+/).map(Number).slice(0, m);
+//     console.log(coinChange(amount, coins));
+//     rl.close();
+//   }
+// });`,
+//     PYTHON: `class Solution:
+//   def coinChange(self, amount, coins):
+//       INF = amount + 1
+//       dp = [INF] * (amount + 1)
+//       dp[0] = 0
+//       for coin in coins:
+//           for x in range(coin, amount + 1):
+//               dp[x] = min(dp[x], dp[x - coin] + 1)
+//       return -1 if dp[amount] == INF else dp[amount]
+
+// if __name__ == "__main__":
+//   import sys
+//   parts = sys.stdin.read().strip().split()
+//   amount = int(parts[0])
+//   m = int(parts[1])
+//   coins = list(map(int, parts[2:2+m]))
+//   sol = Solution()
+//   print(sol.coinChange(amount, coins))`,
+//     JAVA: `import java.util.*;
+// public class Main {
+//   public static int coinChange(int amount, int[] coins) {
+//     int INF = amount + 1;
+//     int[] dp = new int[amount + 1];
+//     Arrays.fill(dp, INF);
+//     dp[0] = 0;
+//     for (int coin : coins) {
+//       for (int x = coin; x <= amount; x++) {
+//         dp[x] = Math.min(dp[x], dp[x - coin] + 1);
+//       }
+//     }
+//     return dp[amount] == INF ? -1 : dp[amount];
+//   }
+
+//   public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     int amount = Integer.parseInt(sc.nextLine().trim());
+//     int m = Integer.parseInt(sc.nextLine().trim());
+//     String[] parts = sc.nextLine().trim().split("\\\\s+");
+//     int[] coins = new int[m];
+//     for (int i = 0; i < m; i++) coins[i] = Integer.parseInt(parts[i]);
+//     System.out.println(coinChange(amount, coins));
+//     sc.close();
+//   }
+// }`
+//   }
+// };
 
 
 const CodeEditor = ({ value, onChange, language = "javascript" }) => {
@@ -1378,7 +1886,7 @@ const CreateProblemForm = () => {
   }
 
   const loadSampleData = () => {
-    const sampleData = sampleType === "DP" ? sampledpData : reverseWordsProblem;
+    const sampleData = sampleType === "DP" ? sampledpData : reverseStringProblem;
 
     replaceTags(sampleData.tags.map((tag) => tag));
     replaceTestCases(sampleData.testCases.map((tc) => tc));

@@ -11,8 +11,7 @@ import {
   Search,
   Filter,
 } from "lucide-react";
-// import AddToPlaylistModal from "./add-to-playlist";
-// import CreatePlaylistModal from "./create-playlist";
+import AddToPlaylistModal from "./add-to-playlist";
 import {
   //   createPlaylist,
   deleteProblem,
@@ -39,6 +38,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import CreatePlaylistModal from "./create-playlist";
 
 const ProblemsTable = ({ problems, user }) => {
 
@@ -47,8 +47,7 @@ const ProblemsTable = ({ problems, user }) => {
   const [selectedTag, setSelectedTag] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
-    useState(false);
+  const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] = useState(false);
   const [selectedProblemId, setSelectedProblemId] = useState(null);
 
 
@@ -98,50 +97,50 @@ const ProblemsTable = ({ problems, user }) => {
   };
 
   const handleCreatePlaylist = async (data) => {
-    // try {
-    //   const response = await fetch("/api/playlists", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       name: data.name,
-    //       description: data.description,
-    //     }),
-    //   });
+    try {
+      const response = await fetch("/api/playlists", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          description: data.description,
+        }),
+      });
 
-    //   const result = await response.json();
+      const result = await response.json();
 
-    //   if (result.success) {
-    //     setIsCreateModalOpen(false);
-    //     toast.success("Playlist created successfully");
-    //   } else {
-    //     throw new Error(result.error);
-    //   }
-    // } catch (error) {
-    //   console.error("Error creating playlist:", error);
-    //   toast.error(error.message || "Failed to create playlist");
-    // }
+      if (result.success) {
+        setIsCreateModalOpen(false);
+        toast.success("Playlist created successfully");
+      } else {
+        toast.error("Failed to create playlist");
+      }
+    } catch (error) {
+      console.error("Error creating playlist:", error);
+      toast.error(error.message || "Failed to create playlist");
+    }
   };
 
   const handleAddToPlaylist = async (problemId, playlistId) => {
-    // try {
-    //   const response = await fetch("/api/playlists/add-problem", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ problemId, playlistId }),
-    //   });
+    try {
+      const response = await fetch("/api/playlists/add-problem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ problemId, playlistId }),
+      });
+x
+      const result = await response.json();
 
-    //   const result = await response.json();
-
-    //   if (result.success) {
-    //     setIsAddToPlaylistModalOpen(false);
-    //     toast.success("Problem added to playlist");
-    //   } else {
-    //     throw new Error(result.error);
-    //   }
-    // } catch (error) {
-    //   console.error("Error adding to playlist:", error);
-    //   toast.error(error.message || "Failed to add problem to playlist");
-    // }
+      if (result.success) {
+        setIsAddToPlaylistModalOpen(false);
+        toast.success("Problem added to playlist");
+      } else {
+        toast.error("Failed to add problem to playlist");
+      }
+    } catch (error) {
+      console.error("Error adding to playlist:", error);
+      toast.error(error.message || "Failed to add problem to playlist");
+    }
   };
 
   const getDifficultyVariant = (difficulty) => {
@@ -385,18 +384,18 @@ const ProblemsTable = ({ problems, user }) => {
       )}
 
       {/* Modals */}
-      {/* <CreatePlaylistModal
+      <CreatePlaylistModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSubmit={handleCreatePlaylist}
-      /> */}
+      />
 
-      {/* <AddToPlaylistModal
+      <AddToPlaylistModal
         isOpen={isAddToPlaylistModalOpen}
         onClose={() => setIsAddToPlaylistModalOpen(false)}
         onSubmit={handleAddToPlaylist}
         problemId={selectedProblemId}
-      /> */}
+      />
     </div>
   ) 
 };

@@ -5,10 +5,15 @@ import {
   Zap,
   ChevronRight,
   Play,
-  Star,
-  Moon,
-  Sun,
-  Menu,
+  Rocket,
+  Github,
+  Twitter,
+  Linkedin,
+  Mail,
+  Heart,
+  Flame,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { onBoardUser } from "@/modules/auth/actions";
+import Link from "next/link";
 
 export default async function Home() {
   await onBoardUser();
@@ -39,9 +45,9 @@ export default async function Home() {
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: "Global Community",
+      title: "Growing Community",
       description:
-        "Learn from thousands of developers worldwide and share your knowledge.",
+        "Join a community of passionate developers learning and growing together.",
     },
     {
       icon: <Zap className="w-6 h-6" />,
@@ -52,10 +58,10 @@ export default async function Home() {
   ];
 
   const stats = [
-    { number: "50K+", label: "Problems Solved" },
-    { number: "10K+", label: "Active Developers" },
-    { number: "25+", label: "Programming Languages" },
-    { number: "98%", label: "Success Rate" },
+    { number: "Fresh", label: "New Platform" },
+    { number: "Daily", label: "New Problems" },
+    { number: "Free", label: "Always Free" },
+    { number: "Learn", label: "At Your Pace" },
   ];
 
   const problemCategories = [
@@ -64,7 +70,6 @@ export default async function Home() {
       title: "Easy Problems",
       description:
         "Perfect for getting started with basic programming concepts and syntax.",
-      count: "500+ Problems",
       color: "amber",
     },
     {
@@ -72,7 +77,6 @@ export default async function Home() {
       title: "Medium Problems",
       description:
         "Challenge yourself with data structures and algorithm problems.",
-      count: "800+ Problems",
       color: "indigo",
     },
     {
@@ -80,13 +84,31 @@ export default async function Home() {
       title: "Hard Problems",
       description:
         "Master complex algorithms and compete in programming contests.",
-      count: "300+ Problems",
       color: "amber",
     },
   ];
 
+  const footerLinks = {
+    product: [
+      { name: "Problems", href: "#" },
+      { name: "Contests", href: "#" },
+      { name: "Discuss", href: "#" },
+      { name: "Playground", href: "#" },
+    ],
+    company: [
+      { name: "About", href: "#" },
+      { name: "Blog", href: "#" },
+      { name: "Contact", href: "#" },
+    ],
+    resources: [
+      { name: "Documentation", href: "#" },
+      { name: "Tutorials", href: "#" },
+      { name: "Community", href: "#" },
+    ],
+  };
+
   return (
-    <div className="min-h-screen  transition-colors mt-24">
+    <div className="min-h-screen transition-colors mt-2">
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col justify-center items-center px-4 pt-16">
         <div className="max-w-6xl mx-auto text-center">
@@ -95,8 +117,8 @@ export default async function Home() {
             variant="secondary"
             className="mb-8 bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900"
           >
-            <Star className="w-4 h-4 mr-2" />
-            Join 10,000+ developers already coding
+            <Rocket className="w-4 h-4 mr-2" />
+            New Platform • Join Early
           </Badge>
 
           {/* Main Heading */}
@@ -119,28 +141,32 @@ export default async function Home() {
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Challenge yourself with thousands of coding problems, compete with
-            developers worldwide, and accelerate your programming journey with
-            real-time feedback and expert solutions.
+            Challenge yourself with coding problems, learn at your own pace,
+            and accelerate your programming journey with real-time feedback.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button
-              size="lg"
-              className="bg-amber-500 hover:bg-amber-600 dark:bg-amber-400 dark:hover:bg-amber-500 text-white dark:text-gray-900 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Start Coding Now
-              <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-indigo-300 dark:border-indigo-600 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950"
-            >
-              Browse Problems
-            </Button>
+            <Link href="/problem/7820e1f0-9cc9-4735-ba9f-70177ac1f6f6">
+              <Button
+                size="lg"
+                className="bg-amber-500 hover:bg-amber-600 dark:bg-amber-400 dark:hover:bg-amber-500 text-white dark:text-gray-900 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Start Coding Now
+                <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+
+            <Link href="/problems">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 border-indigo-300 dark:border-indigo-600 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950"
+              >
+                Browse Problems
+              </Button>
+            </Link>
           </div>
 
           {/* Stats */}
@@ -216,9 +242,9 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Choose your{" "}
+              Start at{" "}
               <span className="text-indigo-600 dark:text-indigo-400">
-                challenge
+                your level
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -255,15 +281,19 @@ export default async function Home() {
                   <CardDescription className="text-gray-600 dark:text-gray-300">
                     {category.description}
                   </CardDescription>
-                  <div
-                    className={`font-semibold ${
-                      category.color === "amber"
-                        ? "text-amber-600 dark:text-amber-400"
-                        : "text-indigo-600 dark:text-indigo-400"
-                    }`}
-                  >
-                    {category.count}
-                  </div>
+                  <Link href="/problems">
+                    <Button
+                      variant="ghost"
+                      className={`w-full ${
+                        category.color === "amber"
+                          ? "text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900"
+                          : "text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900"
+                      }`}
+                    >
+                      Explore
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -271,24 +301,201 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-linear-to-r from-amber-600 to-amber-300  dark:from-amber-600 dark:to-indigo-600 rounded-md">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to start your coding journey?
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Join thousands of developers who are improving their skills every
-            day
-          </p>
-          <Button
-            size="lg"
-            className="bg-white text-gray-900 hover:bg-gray-100 shadow-lg"
-          >
-            Get Started for Free
-          </Button>
+      {/* Enhanced CTA Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-amber-500 via-amber-400 to-indigo-500 dark:from-amber-600 dark:via-orange-500 dark:to-indigo-600 p-1">
+            <div className="bg-white dark:bg-gray-900 rounded-3xl p-12 md:p-16">
+              <div className="text-center space-y-6">
+                <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-semibold">
+                  <Sparkles className="w-4 h-4" />
+                  Join the Community
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">
+                  Begin your coding journey today
+                </h2>
+                
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  Be part of building a platform where developers learn, grow, 
+                  and master problem-solving together. Start practicing now!
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                  <Link href="/problems">
+                    <Button
+                      size="lg"
+                      className="bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 dark:from-amber-400 dark:to-orange-400 text-white dark:text-gray-900 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5 transition-all font-bold"
+                    >
+                      <Play className="w-5 h-5 mr-2" />
+                      Get Started Free
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </Link>
+                  
+                  {/* <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  >
+                    <Code2 className="w-5 h-5 mr-2" />
+                    View Documentation
+                  </Button> */}
+                </div>
+                
+                <div className="flex flex-wrap justify-center gap-6 pt-8 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    No credit card required
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    Free forever
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                    Early access features
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-50 dark:bg-neutral-900/50 border-t border-gray-200 dark:border-gray-800">
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            {/* Brand Section */}
+            <div className="md:col-span-1">
+              <Link href="/" className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 bg-linear-to-br from-amber-500 to-orange-500 rounded-lg flex items-center justify-center">
+                  <Flame className="w-6 h-6 text-white" />
+                </div>
+                <span className="font-bold text-2xl tracking-widest text-amber-600 dark:text-amber-300">
+                  CodeZen
+                </span>
+              </Link>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">
+                Master coding through practice. Build your skills one problem at a time.
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href="https://github.com/mohd-hassan17"
+                  target="_"
+                  className="w-10 h-10 bg-white dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/20 border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-600 rounded-lg flex items-center justify-center transition-all group"
+                >
+                  <Github className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
+                </a>
+                {/* <a
+                  href="#"
+                  className="w-10 h-10 bg-white dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/20 border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-600 rounded-lg flex items-center justify-center transition-all group"
+                >
+                  <Twitter className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
+                </a> */}
+                <a
+                  href="https://www.linkedin.com/in/mohd-hassan17/"
+                  target="_"
+                  className="w-10 h-10 bg-white dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/20 border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-600 rounded-lg flex items-center justify-center transition-all group"
+                >
+                  <Linkedin className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
+                </a>
+                {/* <a
+                  href="#"
+                  className="w-10 h-10 bg-white dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/20 border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-600 rounded-lg flex items-center justify-center transition-all group"
+                >
+                  <Mail className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors" />
+                </a> */}
+              </div>
+            </div>
+
+            {/* Links Sections */}
+            <div>
+              <h3 className="text-gray-900 dark:text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                Product
+              </h3>
+              <ul className="space-y-3">
+                {footerLinks.product.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      // href={link.href}
+                      href='/'
+                      className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-gray-900 dark:text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                Company
+              </h3>
+              <ul className="space-y-3">
+                {footerLinks.company.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      // href={link.href}
+                      href='/'
+                      className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-gray-900 dark:text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                Resources
+              </h3>
+              <ul className="space-y-3">
+                {footerLinks.resources.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      // href={link.href}
+                      href=''
+                      className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              © 2026 CodeZen. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <span>Made with</span>
+              <Heart className="w-4 h-4 text-amber-500 fill-amber-500 animate-pulse" />
+              <span>for developers</span>
+            </div>
+            <div className="flex gap-6 text-sm">
+              <Link
+                href="#"
+                className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="#"
+                className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+              >
+                Terms
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
