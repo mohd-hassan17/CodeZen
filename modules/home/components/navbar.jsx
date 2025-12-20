@@ -10,7 +10,7 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { UserRole } from "@/prisma/generated/enums";
 import { Menu, X } from "lucide-react";
 
-const Navbar = ({ userRole }) => {
+const Navbar = ({ userRole, isSignedIn }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -26,6 +26,7 @@ const Navbar = ({ userRole }) => {
           </Link>
 
           {/* Desktop Links */}
+          {isSignedIn && (
           <div className="hidden md:flex items-center gap-x-6">
             <Link href="/problems" className="nav-link">
               Problems
@@ -34,6 +35,7 @@ const Navbar = ({ userRole }) => {
               Profile
             </Link>
           </div>
+          )}
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
